@@ -1,0 +1,116 @@
+{
+  "contractName": "Investor",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/entity/Investor.sol\":\"Investor\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/entity/Investor.sol\":{\"keccak256\":\"0x5e8348a0e02d4524a4ea275fe51a3db1056f24e79baf33b68f40a1d5b6be8b04\",\"urls\":[\"bzzr://c647cecb814c9c58f0d371489791a73aa8a361438d0fb5986456e04a49f321fa\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a723058202f08ede06bda2054a476ca3987f312a736d0992bf44d25a8444731934da9952e0029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a723058202f08ede06bda2054a476ca3987f312a736d0992bf44d25a8444731934da9952e0029",
+  "sourceMap": "27:20:7:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:20:7;;;;;;;",
+  "deployedSourceMap": "27:20:7:-;;;;;",
+  "source": "pragma solidity ^0.5.1;\r\n\r\ncontract Investor {}",
+  "sourcePath": "C:\\Users\\Calvin\\Desktop\\path-project\\contracts\\entity\\Investor.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/entity/Investor.sol",
+    "exportedSymbols": {
+      "Investor": [
+        1839
+      ]
+    },
+    "id": 1840,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1838,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:7"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1839,
+        "linearizedBaseContracts": [
+          1839
+        ],
+        "name": "Investor",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 1840,
+        "src": "27:20:7"
+      }
+    ],
+    "src": "0:47:7"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/entity/Investor.sol",
+      "exportedSymbols": {
+        "Investor": [
+          1839
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.5",
+            ".1"
+          ]
+        },
+        "id": 1838,
+        "name": "PragmaDirective",
+        "src": "0:23:7"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            1839
+          ],
+          "name": "Investor",
+          "nodes": [
+            null
+          ],
+          "scope": 1840
+        },
+        "id": 1839,
+        "name": "ContractDefinition",
+        "src": "27:20:7"
+      }
+    ],
+    "id": 1840,
+    "name": "SourceUnit",
+    "src": "0:47:7"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-09-25T09:18:37.712Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

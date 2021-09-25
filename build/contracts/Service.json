@@ -1,0 +1,116 @@
+{
+  "contractName": "Service",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/entity/Service.sol\":\"Service\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/entity/Service.sol\":{\"keccak256\":\"0xcbe0837b8aebcd947e493fc2a51390fdcd48367e7ea136033b16922198b3675a\",\"urls\":[\"bzzr://1356e18ec5d34c6f940434489860ea853e8b78487c84b93dcbe40bbc082e54d4\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a72305820ccde9fdb712ee5f4a17834ec22716da6611abf2333e40122f93128041d7f4c7e0029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a72305820ccde9fdb712ee5f4a17834ec22716da6611abf2333e40122f93128041d7f4c7e0029",
+  "sourceMap": "27:19:9:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:19:9;;;;;;;",
+  "deployedSourceMap": "27:19:9:-;;;;;",
+  "source": "pragma solidity ^0.5.1;\r\n\r\ncontract Service {}",
+  "sourcePath": "C:\\Users\\Calvin\\Desktop\\path-project\\contracts\\entity\\Service.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/entity/Service.sol",
+    "exportedSymbols": {
+      "Service": [
+        1845
+      ]
+    },
+    "id": 1846,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1844,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:9"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1845,
+        "linearizedBaseContracts": [
+          1845
+        ],
+        "name": "Service",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 1846,
+        "src": "27:19:9"
+      }
+    ],
+    "src": "0:46:9"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/entity/Service.sol",
+      "exportedSymbols": {
+        "Service": [
+          1845
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.5",
+            ".1"
+          ]
+        },
+        "id": 1844,
+        "name": "PragmaDirective",
+        "src": "0:23:9"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            1845
+          ],
+          "name": "Service",
+          "nodes": [
+            null
+          ],
+          "scope": 1846
+        },
+        "id": 1845,
+        "name": "ContractDefinition",
+        "src": "27:19:9"
+      }
+    ],
+    "id": 1846,
+    "name": "SourceUnit",
+    "src": "0:46:9"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-09-25T09:18:37.713Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

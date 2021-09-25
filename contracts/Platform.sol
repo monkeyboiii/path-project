@@ -1,32 +1,22 @@
 pragma solidity ^0.5.1;
+pragma experimental ABIEncoderV2;
 
 import "./Commodity.sol";
 import "./SafeMath.sol";
+import "./lib/Shared.sol";
 
 contract Platform {
     using SafeMath for uint256;
 
-    /// @notice Roles in automoblie supply chain industry, regulated by
-    /// supervisor.
-    enum Entity {
-        _NONE,
-        CUSTOMER,
-        DEALERSHIP,
-        DISTRIBUTOR,
-        INVESTOR,
-        MANUFACTURER,
-        SERVICE,
-        SUPERVISOR,
-        SUPPLIER
-    }
-
     /// @notice Order for specific commodity.
     /// e.g. car part from supplier, car from manufacturer.
     struct Order {
-        address creator;
-        uint256 time; // time to finish
+        address payable creator;
+        uint256 due;
         uint256 commodity; // index of commodity
-        address filler;
+        uint256 price;
+        uint256 margin;
+        address payable filler;
         OrderStatus status;
     }
 
@@ -43,29 +33,33 @@ contract Platform {
 
     //
 
-    mapping(address => uint8) public entities;
+    Commodity CMD;
+
     Order[] public orders;
-    Commodity cmd;
-    uint256 public PLACE_FEE = 0 wei;
+    uint256 public MAKER_FEE = 0 wei;
+    uint256 public TAKER_FEE = 0 wei;
     uint256 public MARGIN_RATE = 0; // 0.0 to 100.0%
+
+    mapping(address => uint8) public entities;
 
     //
 
     event orderCreated(address creator, uint256 due, uint256 commodity);
-    event orderTaken(address creator, uint256 index);
-    event orderFilled(address creator, uint256 due, uint256 commodity);
-    event orderStoked(address creator, uint256 due, uint256 commodity);
-    event orderCompleted(address creator, uint256 index);
+    event orderTaken(address filler, uint256 index);
+    event orderFilled(address filler, uint256 index);
+    event orderStoked(address filler, uint256 index);
+    event orderCompleted(address creator, address filler, uint256 index);
     event orderCanceled(address creator, uint256 index);
     event orderOverdued(address creator, uint256 index, uint256 due);
 
-    event placeFeeChange(uint256 from, uint256 to);
+    event makerFeeChange(uint256 from, uint256 to);
+    event takerFeeChange(uint256 from, uint256 to);
     event marginRateChange(uint256 from, uint256 to);
 
     //
 
     constructor() public {
-        entities[msg.sender] = uint8(Entity.SUPERVISOR);
+        entities[msg.sender] = uint8(Shared.Entity.SUPERVISOR);
     }
 
     modifier registered() {
@@ -74,18 +68,28 @@ contract Platform {
     }
 
     modifier supervisor() {
-        require(entities[msg.sender] == uint8(Entity.SUPERVISOR));
+        require(entities[msg.sender] == uint8(Shared.Entity.SUPERVISOR));
         _;
+    }
+
+    function queryEntity(address addr) public view returns (uint8) {
+        return entities[addr];
     }
 
     function register(address addr, uint8 entity) public supervisor {
         entities[addr] = entity;
     }
 
-    function setPlaceFee(uint256 place_fee) external supervisor {
-        emit placeFeeChange(PLACE_FEE, place_fee);
+    function setMakerFee(uint256 mf) external supervisor {
+        emit makerFeeChange(MAKER_FEE, mf);
 
-        PLACE_FEE = place_fee;
+        MAKER_FEE = mf;
+    }
+
+    function setTakerFee(uint256 tf) external supervisor {
+        emit takerFeeChange(TAKER_FEE, tf);
+
+        TAKER_FEE = tf;
     }
 
     function setMarginRate(uint256 margin_rate) external supervisor {
@@ -100,31 +104,44 @@ contract Platform {
 
     //
 
+    /// @param index The index of the commodity in the CMD.commodities list
     /// @return the index of the order created
-    function createOrder(uint256 commodity, uint256 due)
+    function createOrder(uint256 index, uint256 due)
         external
         payable
         registered
         returns (uint256)
     {
-        require(msg.value >= PLACE_FEE, "Platform: place order fee not enough");
+        require(msg.value >= MAKER_FEE, "Platform: make order fee not enough");
         require(due > now, "Platform: malformed parameter due");
-        require(commodity >= Commodity.commodities.length , "Platform: non-existing commodity");
+        Shared.Detail memory commodity = CMD.getCommodity(index);
 
+        uint256 price = commodity.price;
+        uint256 margin = price.mul(MARGIN_RATE).div(1000);
+        require(
+            msg.value - MAKER_FEE > margin,
+            "Platform: make order margin not enough"
+        );
         orders.push(
-            Order(now, commodity, msg.sender, address(0), OrderStatus.OPEN)
+            Order(
+                msg.sender,
+                now,
+                index,
+                price,
+                margin,
+                address(0),
+                OrderStatus.OPEN
+            )
         );
 
-        emit orderCreated(msg.sender, due, commodity);
+        emit orderCreated(msg.sender, due, index);
         return orders.length - 1;
     }
 
+    /// @param index The index in the order list
     function takeOrder(uint256 index) external payable registered {
         Order storage order = orders[index];
-        require(
-            msg.value >= order.price.mul(MARGIN_RATE).div(1000),
-            "Platform: place order fee not enough"
-        );
+        require(msg.value >= TAKER_FEE, "Platform: take order fee not enough");
         if (now > order.due) {
             order.status = OrderStatus.OVERDUE;
             revert("Platform: order overdue");
@@ -136,7 +153,8 @@ contract Platform {
         emit orderTaken(msg.sender, index);
     }
 
-    function cancelOrder(uint256 index) external payable registered {
+    /// @param index The index in the order list
+    function cancelOrder(uint256 index) external registered {
         Order storage order = orders[index];
         require(msg.sender == order.creator, "Platform: order not yours");
         require(
@@ -148,25 +166,60 @@ contract Platform {
             revert("Platform: order overdue");
         }
 
-        order.filler = msg.sender;
-        order.status = OrderStatus.TAKEN;
+        order.status = OrderStatus.CANCELD;
+        msg.sender.transfer(order.margin);
 
-        msg.sender.transfer(order.price);
-
-        emit orderTaken(msg.sender, index);
+        emit orderCanceled(msg.sender, index);
     }
 
+    /// @param index The index in the order list
     function fillOrder(uint256 index) external payable registered {
         Order storage order = orders[index];
-        require(msg.sender == order.filler);
+        require(msg.sender == order.filler, "Platform: order not yours");
         if (now > order.due) {
             order.status = OrderStatus.OVERDUE;
             revert("Platform: order overdue");
         }
+
+        order.status = OrderStatus.FILLED;
+
+        emit orderFilled(msg.sender, index);
     }
 
-    function stockOrder(uint256 index) external payable registered {}
+    function stockOrder(uint256 index, address stocker)
+        external
+        payable
+        registered
+    {
+        Order storage order = orders[index];
+        require(msg.sender == order.filler, "Platform: order not yours");
+        require(entities[stocker] == uint8(Shared.Entity.DISTRIBUTOR));
+        if (now > order.due) {
+            order.status = OrderStatus.OVERDUE;
+            revert("Platform: order overdue");
+        }
+
+        order.status = OrderStatus.STOCKED;
+
+        emit orderStoked(msg.sender, index);
+    }
 
     /// @notice Order creator finally completes by confirming received commodity.
-    function completeOrder() external payable registered {}
+    function completeOrder(uint256 index) external payable registered {
+        Order storage order = orders[index];
+        require(msg.sender == order.creator, "Platform: order not yours");
+        require(
+            order.status != OrderStatus.COMPLETED,
+            "Platform: order already completed"
+        );
+        require(
+            msg.value == order.price - order.margin,
+            "Platform: payment not enough"
+        );
+
+        order.status = OrderStatus.COMPLETED;
+        order.filler.transfer(order.price);
+
+        emit orderCompleted(msg.sender, order.filler, index);
+    }
 }

@@ -3,12 +3,13 @@
 pragma solidity ^0.5.1;
 
 import "./interface/IERC721.sol";
+import "./lib/oraclizeAPI_0.5.sol";
 
 /**
  * @dev Modified implementation of
- * https://eips.ethereum.org/EIPS/eip-721[ERC721] Non-Fungible Token Standard,
- * including the Metadata extension, but not including the Enumerable 
- * extension, which is available separately as {ERC721Enumerable}.
+ * https://eips.ethereum.org/EIPS/eip-721[ Non-Fungible Token Standard,
+ * including the Metadata extension, but not including the Enumerable
+ * extension, which is available separately as {numerable}.
  * This is the actual instance of commodity.
  */
 contract Part is IERC721 {
@@ -21,12 +22,12 @@ contract Part is IERC721 {
     // Mapping from token ID to owner address
     mapping(uint256 => address) private _owners;
 
-    // Mapping owner address to token
-    mapping(address => uint256[]) private _collections;
-    
     // Mapping owner address to token count
     mapping(address => uint256) private _balances;
-    
+
+    // Mapping owner address to token
+    mapping(address => uint256[]) private _collections;
+
     // Mapping from token ID to approved address
     mapping(uint256 => address) private _tokenApprovals;
 
@@ -34,113 +35,96 @@ contract Part is IERC721 {
     mapping(address => mapping(address => bool)) private _operatorApprovals;
 
     // part dependency graph
-    mapping(uint => uint[]) public _dependency;
+    mapping(uint256 => uint256[]) public _dependency;
 
-    constructor(string memory name_, string memory symbol_) {
+    constructor(string memory name_, string memory symbol_) public {
         _name = name_;
         _symbol = symbol_;
         _owners[0] = address(0);
         _dependency[0] = new uint256[](0);
     }
 
-    function balanceOf(address owner) public view virtual returns (uint256) {
+    function balanceOf(address owner) public view returns (uint256) {
         require(
             owner != address(0),
-            "ERC721: balance query for the zero address"
+            "Part: balance query for the zero address"
         );
         return _balances[owner];
     }
 
-    function collectionOf(address owner) public view virtual returns (uint256[]) {
+    function collectionOf(address owner)
+        public
+        view
+        returns (uint256[] memory)
+    {
         require(
             owner != address(0),
-            "ERC721: collection query for the zero address"
+            "Part: collection query for the zero address"
         );
-        return _collection[owner];
-
+        return _collections[owner];
     }
 
-    function ownerOf(uint256 tokenId) public view virtual returns (address) {
+    function ownerOf(uint256 tokenId) public view returns (address) {
         address owner = _owners[tokenId];
-        require(
-            owner != address(0),
-            "ERC721: owner query for nonexistent token"
-        );
+        require(owner != address(0), "Part: owner query for nonexistent token");
         return owner;
     }
 
-    function name() public view virtual returns (string memory) {
+    function name() public view returns (string memory) {
         return _name;
     }
 
-    function symbol() public view virtual returns (string memory) {
+    function symbol() public view returns (string memory) {
         return _symbol;
     }
 
-    function tokenURI(uint256 tokenId)
-        public
-        view
-        virtual
-        returns (string memory)
-    {
-        require(
-            _exists(tokenId),
-            "ERC721Metadata: URI query for nonexistent token"
-        );
+    // function tokenURI(uint256 tokenId) public view returns (string memory) {
+    //     require(_exists(tokenId), "Part: URI query for nonexistent token");
 
-        string memory baseURI = _baseURI();
-        return
-            bytes(baseURI).length > 0
-                ? string(abi.encodePacked(baseURI, tokenId.toString()))
-                : "";
-    }
+    //     string memory baseURI = _baseURI();
+    //     return
+    //         bytes(baseURI).length > 0
+    //             ? string(abi.encodePacked(baseURI, tokenId.toString()))
+    //             : "";
+    // }
 
-    /**
-     * @dev Base URI for computing {tokenURI}. If set, the resulting URI for each
-     * token will be the concatenation of the `baseURI` and the `tokenId`. Empty
-     * by default, can be overriden in child contracts.
-     */
-    function _baseURI() internal view virtual returns (string memory) {
-        return "";
-    }
+    // /**
+    //  * @dev Base URI for computing {tokenURI}. If set, the resulting URI for each
+    //  * token will be the concatenation of the `baseURI` and the `tokenId`. Empty
+    //  * by default, can be overriden in child contracts.
+    //  */
+    // function _baseURI() internal view returns (string memory) {
+    //     return "";
+    // }
 
-    function approve(address to, uint256 tokenId) public virtual {
+    function approve(address to, uint256 tokenId) public payable {
         address owner = this.ownerOf(tokenId);
-        require(to != owner, "ERC721: approval to current owner");
+        require(to != owner, "Part: approval to current owner");
 
         require(
-            _msgSender() == owner || isApprovedForAll(owner, _msgSender()),
-            "ERC721: approve caller is not owner nor approved for all"
+            msg.sender == owner || isApprovedForAll(owner, msg.sender),
+            "Part: approve caller is not owner nor approved for all"
         );
 
         _approve(to, tokenId);
     }
 
-    function getApproved(uint256 tokenId)
-        public
-        view
-        virtual
-        returns (address)
-    {
-        require(
-            _exists(tokenId),
-            "ERC721: approved query for nonexistent token"
-        );
+    function getApproved(uint256 tokenId) public view returns (address) {
+        require(_exists(tokenId), "Part: approved query for nonexistent token");
 
         return _tokenApprovals[tokenId];
     }
 
-    function setApprovalForAll(address operator, bool approved) public virtual {
-        require(operator != _msgSender(), "ERC721: approve to caller");
+    function setApprovalForAll(address operator, bool approved) public {
+        require(operator != msg.sender, "Part: approve to caller");
 
-        _operatorApprovals[_msgSender()][operator] = approved;
-        emit ApprovalForAll(_msgSender(), operator, approved);
+        _operatorApprovals[msg.sender][operator] = approved;
+        emit ApprovalForAll(msg.sender, operator, approved);
     }
 
     function isApprovedForAll(address owner, address operator)
         public
         view
-        virtual
         returns (bool)
     {
         return _operatorApprovals[owner][operator];
@@ -150,11 +134,11 @@ contract Part is IERC721 {
         address from,
         address to,
         uint256 tokenId
-    ) public virtual {
+    ) public payable {
         //solhint-disable-next-line max-line-length
         require(
-            _isApprovedOrOwner(_msgSender(), tokenId),
-            "ERC721: transfer caller is not owner nor approved"
+            _isApprovedOrOwner(msg.sender, tokenId),
+            "Part: transfer caller is not owner nor approved"
         );
 
         _transfer(from, to, tokenId);
@@ -164,29 +148,26 @@ contract Part is IERC721 {
         address from,
         address to,
         uint256 tokenId
-    ) public virtual {
+    ) public payable {
         safeTransferFrom(from, to, tokenId, "");
     }
 
-    /**
-     * @dev See {IERC721-safeTransferFrom}.
-     */
     function safeTransferFrom(
         address from,
         address to,
         uint256 tokenId,
         bytes memory _data
-    ) public virtual {
+    ) public payable {
         require(
-            _isApprovedOrOwner(_msgSender(), tokenId),
-            "ERC721: transfer caller is not owner nor approved"
+            _isApprovedOrOwner(msg.sender, tokenId),
+            "Part: transfer caller is not owner nor approved"
         );
         _safeTransfer(from, to, tokenId, _data);
     }
 
     /**
      * @dev Safely transfers `tokenId` token from `from` to `to`, checking first that contract recipients
-     * are aware of the ERC721 protocol to prevent tokens from being forever locked.
+     * are aware of the protocol to prevent tokens from being forever locked.
      *
      * `_data` is additional data, it has no specified format and it is sent in call to `to`.
      *
@@ -198,7 +179,7 @@ contract Part is IERC721 {
      * - `from` cannot be the zero address.
      * - `to` cannot be the zero address.
      * - `tokenId` token must exist and be owned by `from`.
-     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     * - If `to` refers to a smart contract, it must implement {Ieceiver-oneceived}, which is called upon a safe transfer.
      *
      * Emits a {Transfer} event.
      */
@@ -207,12 +188,12 @@ contract Part is IERC721 {
         address to,
         uint256 tokenId,
         bytes memory _data
-    ) internal virtual {
+    ) internal {
         _transfer(from, to, tokenId);
-        require(
-            _checkOnERC721Received(from, to, tokenId, _data),
-            "ERC721: transfer to non ERC721Receiver implementer"
-        );
+        // require(
+        //     _checkOneceived(from, to, tokenId, _data),
+        //     "Part: transfer to non eceiver implementer"
+        // );
     }
 
     /**
@@ -223,7 +204,7 @@ contract Part is IERC721 {
      * Tokens start existing when they are minted (`_mint`),
      * and stop existing when they are burned (`_burn`).
      */
-    function _exists(uint256 tokenId) internal view virtual returns (bool) {
+    function _exists(uint256 tokenId) internal view returns (bool) {
         return _owners[tokenId] != address(0);
     }
 
@@ -237,14 +218,10 @@ contract Part is IERC721 {
     function _isApprovedOrOwner(address spender, uint256 tokenId)
         internal
         view
-        virtual
         returns (bool)
     {
-        require(
-            _exists(tokenId),
-            "ERC721: operator query for nonexistent token"
-        );
-        address owner = ERC721.ownerOf(tokenId);
+        require(_exists(tokenId), "Part: operator query for nonexistent token");
+        address owner = ownerOf(tokenId);
         return (spender == owner ||
             getApproved(tokenId) == spender ||
             isApprovedForAll(owner, spender));
@@ -256,28 +233,28 @@ contract Part is IERC721 {
      * Requirements:
      *
      * - `tokenId` must not exist.
-     * - If `to` refers to a smart contract, it must implement {IERC721Receiver-onERC721Received}, which is called upon a safe transfer.
+     * - If `to` refers to a smart contract, it must implement {Ieceiver-oneceived}, which is called upon a safe transfer.
      *
      * Emits a {Transfer} event.
      */
-    function _safeMint(address to, uint256 tokenId) internal virtual {
+    function _safeMint(address to, uint256 tokenId) internal {
         _safeMint(to, tokenId, "");
     }
 
     /**
-     * @dev Same as {xref-ERC721-_safeMint-address-uint256-}[`_safeMint`], with an additional `data` parameter which is
-     * forwarded in {IERC721Receiver-onERC721Received} to contract recipients.
+     * @dev Same as {xref-_safeMint-address-uint256-}[`_safeMint`], with an additional `data` parameter which is
+     * forwarded in {Ieceiver-oneceived} to contract recipients.
      */
     function _safeMint(
         address to,
         uint256 tokenId,
         bytes memory _data
-    ) internal virtual {
+    ) internal {
         _mint(to, tokenId);
-        require(
-            _checkOnERC721Received(address(0), to, tokenId, _data),
-            "ERC721: transfer to non ERC721Receiver implementer"
-        );
+        // require(
+        //     _checkOneceived(address(0), to, tokenId, _data),
+        //     "Part: transfer to non eceiver implementer"
+        // );
     }
 
     /**
@@ -292,9 +269,9 @@ contract Part is IERC721 {
      *
      * Emits a {Transfer} event.
      */
-    function _mint(address to, uint256 tokenId) internal virtual {
-        require(to != address(0), "ERC721: mint to the zero address");
-        require(!_exists(tokenId), "ERC721: token already minted");
+    function _mint(address to, uint256 tokenId) internal {
+        require(to != address(0), "Part: mint to the zero address");
+        require(!_exists(tokenId), "Part: token already minted");
 
         _beforeTokenTransfer(address(0), to, tokenId);
 
@@ -314,8 +291,8 @@ contract Part is IERC721 {
      *
      * Emits a {Transfer} event.
      */
-    function _burn(uint256 tokenId) internal virtual {
-        address owner = ERC721.ownerOf(tokenId);
+    function _burn(uint256 tokenId) internal {
+        address owner = ownerOf(tokenId);
 
         _beforeTokenTransfer(owner, address(0), tokenId);
 
@@ -343,12 +320,12 @@ contract Part is IERC721 {
         address from,
         address to,
         uint256 tokenId
-    ) internal virtual {
+    ) internal {
         require(
-            ERC721.ownerOf(tokenId) == from,
-            "ERC721: transfer of token that is not own"
+            ownerOf(tokenId) == from,
+            "Part: transfer of token that is not own"
         );
-        require(to != address(0), "ERC721: transfer to the zero address");
+        require(to != address(0), "Part: transfer to the zero address");
 
         _beforeTokenTransfer(from, to, tokenId);
 
@@ -367,51 +344,9 @@ contract Part is IERC721 {
      *
      * Emits a {Approval} event.
      */
-    function _approve(address to, uint256 tokenId) internal virtual {
+    function _approve(address to, uint256 tokenId) internal {
         _tokenApprovals[tokenId] = to;
-        emit Approval(ERC721.ownerOf(tokenId), to, tokenId);
-    }
-
-    /**
-     * @dev Internal function to invoke {IERC721Receiver-onERC721Received} on a target address.
-     * The call is not executed if the target address is not a contract.
-     *
-     * @param from address representing the previous owner of the given token ID
-     * @param to target address that will receive the tokens
-     * @param tokenId uint256 ID of the token to be transferred
-     * @param _data bytes optional data to send along with the call
-     * @return bool whether the call correctly returned the expected magic value
-     */
-    function _checkOnERC721Received(
-        address from,
-        address to,
-        uint256 tokenId,
-        bytes memory _data
-    ) private returns (bool) {
-        if (to.isContract()) {
-            try 
-                IERC721Receiver(to).onERC721Received(
-                    _msgSender(),
-                    from,
-                    tokenId,
-                    _data
-                )
-            returns (bytes4 retval) {
-                return retval == IERC721Receiver.onERC721Received.selector;
-            } catch (bytes memory reason) {
-                if (reason.length == 0) {
-                    revert(
-                        "ERC721: transfer to non ERC721Receiver implementer"
-                    );
-                } else {
-                    assembly {
-                        revert(add(32, reason), mload(reason))
-                    }
-                }
-            }
-        } else {
-            return true;
-        }
+        emit Approval(ownerOf(tokenId), to, tokenId);
     }
 
     /**
@@ -432,5 +367,5 @@ contract Part is IERC721 {
         address from,
         address to,
         uint256 tokenId
-    ) internal virtual {}
+    ) internal {}
 }

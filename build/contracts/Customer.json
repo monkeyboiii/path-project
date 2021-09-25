@@ -1,0 +1,116 @@
+{
+  "contractName": "Customer",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/entity/Customer.sol\":\"Customer\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/entity/Customer.sol\":{\"keccak256\":\"0xa63ac68e170d26fd75c694386d3cb4011f229c7d98638b23da2d2d27afc21b80\",\"urls\":[\"bzzr://48ac6280e79898e8490d6b7ccb8ce9e658c114701430c0562eb1d9227cae0f57\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a723058204027a2fa4deb67a567a204511f28938f91673e3748ad55cb88c4ba15970638970029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a723058204027a2fa4deb67a567a204511f28938f91673e3748ad55cb88c4ba15970638970029",
+  "sourceMap": "27:20:4:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:20:4;;;;;;;",
+  "deployedSourceMap": "27:20:4:-;;;;;",
+  "source": "pragma solidity ^0.5.1;\r\n\r\ncontract Customer {}\r\n",
+  "sourcePath": "C:\\Users\\Calvin\\Desktop\\path-project\\contracts\\entity\\Customer.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/entity/Customer.sol",
+    "exportedSymbols": {
+      "Customer": [
+        1830
+      ]
+    },
+    "id": 1831,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1829,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:4"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1830,
+        "linearizedBaseContracts": [
+          1830
+        ],
+        "name": "Customer",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 1831,
+        "src": "27:20:4"
+      }
+    ],
+    "src": "0:49:4"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/entity/Customer.sol",
+      "exportedSymbols": {
+        "Customer": [
+          1830
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.5",
+            ".1"
+          ]
+        },
+        "id": 1829,
+        "name": "PragmaDirective",
+        "src": "0:23:4"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            1830
+          ],
+          "name": "Customer",
+          "nodes": [
+            null
+          ],
+          "scope": 1831
+        },
+        "id": 1830,
+        "name": "ContractDefinition",
+        "src": "27:20:4"
+      }
+    ],
+    "id": 1831,
+    "name": "SourceUnit",
+    "src": "0:49:4"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-09-25T09:18:37.708Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

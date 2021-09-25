@@ -1,0 +1,116 @@
+{
+  "contractName": "Supplier",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/entity/Supplier.sol\":\"Supplier\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/entity/Supplier.sol\":{\"keccak256\":\"0xc4eb01e8f65239cb88732011dac6ab212088f8c0b8af3e709b5be68cc2064b19\",\"urls\":[\"bzzr://493d76a9668ad8009a58f514ca1b533bdd868976cd8a984c40e1ac0f28ba9a39\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a723058208afc5d6d7220b24223920eec6245d20081ab4e97229b8c3cf8215cd5634ed8a00029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a723058208afc5d6d7220b24223920eec6245d20081ab4e97229b8c3cf8215cd5634ed8a00029",
+  "sourceMap": "27:20:11:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:20:11;;;;;;;",
+  "deployedSourceMap": "27:20:11:-;;;;;",
+  "source": "pragma solidity ^0.5.1;\r\n\r\ncontract Supplier {}\r\n",
+  "sourcePath": "C:\\Users\\Calvin\\Desktop\\path-project\\contracts\\entity\\Supplier.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/entity/Supplier.sol",
+    "exportedSymbols": {
+      "Supplier": [
+        1851
+      ]
+    },
+    "id": 1852,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1850,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:11"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1851,
+        "linearizedBaseContracts": [
+          1851
+        ],
+        "name": "Supplier",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 1852,
+        "src": "27:20:11"
+      }
+    ],
+    "src": "0:49:11"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/entity/Supplier.sol",
+      "exportedSymbols": {
+        "Supplier": [
+          1851
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.5",
+            ".1"
+          ]
+        },
+        "id": 1850,
+        "name": "PragmaDirective",
+        "src": "0:23:11"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            1851
+          ],
+          "name": "Supplier",
+          "nodes": [
+            null
+          ],
+          "scope": 1852
+        },
+        "id": 1851,
+        "name": "ContractDefinition",
+        "src": "27:20:11"
+      }
+    ],
+    "id": 1852,
+    "name": "SourceUnit",
+    "src": "0:49:11"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-09-25T09:18:37.714Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}

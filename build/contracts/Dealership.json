@@ -1,0 +1,116 @@
+{
+  "contractName": "Dealership",
+  "abi": [],
+  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/entity/Dealership.sol\":\"Dealership\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/entity/Dealership.sol\":{\"keccak256\":\"0x072923b0dfc5ef1124d40b77535f38a9eba1bf3350a5e61b7d41391a751d87f5\",\"urls\":[\"bzzr://9ac4a76e9d0800f0b50bceb22718245ed07be6649ba2fd9a6a1c2b2a313a90c6\"]}},\"version\":1}",
+  "bytecode": "0x6080604052348015600f57600080fd5b50603580601d6000396000f3fe6080604052600080fdfea165627a7a72305820b5d4c4b52cf80880c1848b0dd4d68441f0c67261f65cbd63028a9c57d6e349160029",
+  "deployedBytecode": "0x6080604052600080fdfea165627a7a72305820b5d4c4b52cf80880c1848b0dd4d68441f0c67261f65cbd63028a9c57d6e349160029",
+  "sourceMap": "27:22:5:-;;;;8:9:-1;5:2;;;30:1;27;20:12;5:2;27:22:5;;;;;;;",
+  "deployedSourceMap": "27:22:5:-;;;;;",
+  "source": "pragma solidity ^0.5.1;\r\n\r\ncontract Dealership {}",
+  "sourcePath": "C:\\Users\\Calvin\\Desktop\\path-project\\contracts\\entity\\Dealership.sol",
+  "ast": {
+    "absolutePath": "project:/contracts/entity/Dealership.sol",
+    "exportedSymbols": {
+      "Dealership": [
+        1833
+      ]
+    },
+    "id": 1834,
+    "nodeType": "SourceUnit",
+    "nodes": [
+      {
+        "id": 1832,
+        "literals": [
+          "solidity",
+          "^",
+          "0.5",
+          ".1"
+        ],
+        "nodeType": "PragmaDirective",
+        "src": "0:23:5"
+      },
+      {
+        "baseContracts": [],
+        "contractDependencies": [],
+        "contractKind": "contract",
+        "documentation": null,
+        "fullyImplemented": true,
+        "id": 1833,
+        "linearizedBaseContracts": [
+          1833
+        ],
+        "name": "Dealership",
+        "nodeType": "ContractDefinition",
+        "nodes": [],
+        "scope": 1834,
+        "src": "27:22:5"
+      }
+    ],
+    "src": "0:49:5"
+  },
+  "legacyAST": {
+    "attributes": {
+      "absolutePath": "project:/contracts/entity/Dealership.sol",
+      "exportedSymbols": {
+        "Dealership": [
+          1833
+        ]
+      }
+    },
+    "children": [
+      {
+        "attributes": {
+          "literals": [
+            "solidity",
+            "^",
+            "0.5",
+            ".1"
+          ]
+        },
+        "id": 1832,
+        "name": "PragmaDirective",
+        "src": "0:23:5"
+      },
+      {
+        "attributes": {
+          "baseContracts": [
+            null
+          ],
+          "contractDependencies": [
+            null
+          ],
+          "contractKind": "contract",
+          "documentation": null,
+          "fullyImplemented": true,
+          "linearizedBaseContracts": [
+            1833
+          ],
+          "name": "Dealership",
+          "nodes": [
+            null
+          ],
+          "scope": 1834
+        },
+        "id": 1833,
+        "name": "ContractDefinition",
+        "src": "27:22:5"
+      }
+    ],
+    "id": 1834,
+    "name": "SourceUnit",
+    "src": "0:49:5"
+  },
+  "compiler": {
+    "name": "solc",
+    "version": "0.5.1+commit.c8a2cb62.Emscripten.clang"
+  },
+  "networks": {},
+  "schemaVersion": "3.4.3",
+  "updatedAt": "2021-09-25T09:18:37.709Z",
+  "devdoc": {
+    "methods": {}
+  },
+  "userdoc": {
+    "methods": {}
+  }
+}
