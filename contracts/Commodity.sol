@@ -6,7 +6,7 @@ import "./lib/Shared.sol";
 
 /// parts for sale
 contract Commodity {
-    Platform platform;
+    Platform plt;
     address private SUPERVISOR;
     uint256 public LIST_FEE = 0 wei;
 
@@ -34,10 +34,8 @@ contract Commodity {
 
     modifier merchant() {
         require(
-            platform.queryEntity(msg.sender) ==
-                uint8(Shared.Entity.MANUFACTURER) ||
-                platform.queryEntity(msg.sender) ==
-                uint8(Shared.Entity.SUPPLIER)
+            plt.queryEntity(msg.sender) == uint8(Shared.Entity.MANUFACTURER) ||
+                plt.queryEntity(msg.sender) == uint8(Shared.Entity.SUPPLIER)
         );
         _;
     }

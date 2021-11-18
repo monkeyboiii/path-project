@@ -12,14 +12,14 @@
     "absolutePath": "project:/contracts/entity/Dealership.sol",
     "exportedSymbols": {
       "Dealership": [
-        1833
+        1901
       ]
     },
-    "id": 1834,
+    "id": 1902,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1832,
+        "id": 1900,
         "literals": [
           "solidity",
           "^",
@@ -35,14 +35,14 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1833,
+        "id": 1901,
         "linearizedBaseContracts": [
-          1833
+          1901
         ],
         "name": "Dealership",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 1834,
+        "scope": 1902,
         "src": "27:22:5"
       }
     ],
@@ -53,7 +53,7 @@
       "absolutePath": "project:/contracts/entity/Dealership.sol",
       "exportedSymbols": {
         "Dealership": [
-          1833
+          1901
         ]
       }
     },
@@ -67,7 +67,7 @@
             ".1"
           ]
         },
-        "id": 1832,
+        "id": 1900,
         "name": "PragmaDirective",
         "src": "0:23:5"
       },
@@ -83,20 +83,20 @@
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
-            1833
+            1901
           ],
           "name": "Dealership",
           "nodes": [
             null
           ],
-          "scope": 1834
+          "scope": 1902
         },
-        "id": 1833,
+        "id": 1901,
         "name": "ContractDefinition",
         "src": "27:22:5"
       }
     ],
-    "id": 1834,
+    "id": 1902,
     "name": "SourceUnit",
     "src": "0:49:5"
   },
@@ -106,7 +106,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-09-25T09:18:37.709Z",
+  "updatedAt": "2021-11-16T09:37:30.084Z",
   "devdoc": {
     "methods": {}
   },

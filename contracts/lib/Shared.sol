@@ -21,4 +21,27 @@ library Shared {
         uint256 price;
         bool available;
     }
+
+    /// @notice Order for specific commodity.
+    /// e.g. car part from supplier, car from manufacturer.
+    struct Order {
+        address payable creator;
+        uint256 due;
+        uint256 commodity; // index of commodity
+        uint256 price;
+        uint256 margin;
+        address payable filler;
+        OrderStatus status;
+    }
+
+    enum OrderStatus {
+        _NONE,
+        OPEN,
+        TAKEN,
+        FILLED,
+        STOCKED,
+        COMPLETED,
+        CANCELD,
+        OVERDUE
+    }
 }

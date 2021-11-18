@@ -12,14 +12,14 @@
     "absolutePath": "project:/contracts/entity/Distributor.sol",
     "exportedSymbols": {
       "Distributor": [
-        1836
+        1904
       ]
     },
-    "id": 1837,
+    "id": 1905,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1835,
+        "id": 1903,
         "literals": [
           "solidity",
           "^",
@@ -35,14 +35,14 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1836,
+        "id": 1904,
         "linearizedBaseContracts": [
-          1836
+          1904
         ],
         "name": "Distributor",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 1837,
+        "scope": 1905,
         "src": "27:23:6"
       }
     ],
@@ -53,7 +53,7 @@
       "absolutePath": "project:/contracts/entity/Distributor.sol",
       "exportedSymbols": {
         "Distributor": [
-          1836
+          1904
         ]
       }
     },
@@ -67,7 +67,7 @@
             ".1"
           ]
         },
-        "id": 1835,
+        "id": 1903,
         "name": "PragmaDirective",
         "src": "0:23:6"
       },
@@ -83,20 +83,20 @@
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
-            1836
+            1904
           ],
           "name": "Distributor",
           "nodes": [
             null
           ],
-          "scope": 1837
+          "scope": 1905
         },
-        "id": 1836,
+        "id": 1904,
         "name": "ContractDefinition",
         "src": "27:23:6"
       }
     ],
-    "id": 1837,
+    "id": 1905,
     "name": "SourceUnit",
     "src": "0:50:6"
   },
@@ -106,7 +106,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-09-25T09:18:37.711Z",
+  "updatedAt": "2021-11-16T09:37:30.084Z",
   "devdoc": {
     "methods": {}
   },

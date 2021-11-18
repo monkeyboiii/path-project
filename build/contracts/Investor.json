@@ -12,14 +12,14 @@
     "absolutePath": "project:/contracts/entity/Investor.sol",
     "exportedSymbols": {
       "Investor": [
-        1839
+        1907
       ]
     },
-    "id": 1840,
+    "id": 1908,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1838,
+        "id": 1906,
         "literals": [
           "solidity",
           "^",
@@ -35,14 +35,14 @@
         "contractKind": "contract",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1839,
+        "id": 1907,
         "linearizedBaseContracts": [
-          1839
+          1907
         ],
         "name": "Investor",
         "nodeType": "ContractDefinition",
         "nodes": [],
-        "scope": 1840,
+        "scope": 1908,
         "src": "27:20:7"
       }
     ],
@@ -53,7 +53,7 @@
       "absolutePath": "project:/contracts/entity/Investor.sol",
       "exportedSymbols": {
         "Investor": [
-          1839
+          1907
         ]
       }
     },
@@ -67,7 +67,7 @@
             ".1"
           ]
         },
-        "id": 1838,
+        "id": 1906,
         "name": "PragmaDirective",
         "src": "0:23:7"
       },
@@ -83,20 +83,20 @@
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
-            1839
+            1907
           ],
           "name": "Investor",
           "nodes": [
             null
           ],
-          "scope": 1840
+          "scope": 1908
         },
-        "id": 1839,
+        "id": 1907,
         "name": "ContractDefinition",
         "src": "27:20:7"
       }
     ],
-    "id": 1840,
+    "id": 1908,
     "name": "SourceUnit",
     "src": "0:47:7"
   },
@@ -106,7 +106,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-09-25T09:18:37.712Z",
+  "updatedAt": "2021-11-16T09:37:30.085Z",
   "devdoc": {
     "methods": {}
   },

@@ -19,6 +19,9 @@ contract Part is IERC721 {
     // Token symbol
     string private _symbol;
 
+    // Token symbol
+    uint256 public total;
+
     // Mapping from token ID to owner address
     mapping(uint256 => address) private _owners;
 
@@ -76,6 +79,24 @@ contract Part is IERC721 {
 
     function symbol() public view returns (string memory) {
         return _symbol;
+    }
+
+    function getTotal() public view returns (uint256) {
+        return total;
+    }
+
+    function mint(address to) external payable returns (uint256) {
+        _safeMint(to, total);
+        total++;
+        return total;
+    }
+
+    function trace(uint256 tokenId) external view returns (string memory) {
+        string memory ans = "";
+        for (uint256 i = 0; i < _dependency[tokenId].length; i++) {
+            // TODO: serical library for concatenation
+        }
+        return ans;
     }
 
     // function tokenURI(uint256 tokenId) public view returns (string memory) {

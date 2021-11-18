@@ -1,25 +1,25 @@
 {
   "contractName": "Shared",
   "abi": [],
-  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/lib/Shared.sol\":\"Shared\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/lib/Shared.sol\":{\"keccak256\":\"0x9a313bcb98136aaec8515273674e628dd43dc755bd4d30a78b656a8388dde07c\",\"urls\":[\"bzzr://e950bd2c172e160bc753a2c8f870780dfd53dab0b676c0b1b10b451c49a8a999\"]}},\"version\":1}",
-  "bytecode": "0x604c602c600b82828239805160001a60731460008114601c57601e565bfe5b5030600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a7230582004438b6879228672241e394e0b79734871a8b1f82d36c4201a8a5f6a9d9237c50029",
-  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a7230582004438b6879228672241e394e0b79734871a8b1f82d36c4201a8a5f6a9d9237c50029",
-  "sourceMap": "27:455:13:-;;132:2:-1;166:7;155:9;146:7;137:37;252:7;246:14;243:1;238:23;232:4;229:33;270:1;265:20;;;;222:63;;265:20;274:9;222:63;;298:9;295:1;288:20;328:4;319:7;311:22;352:7;343;336:24",
-  "deployedSourceMap": "27:455:13:-;;;;;;;;",
-  "source": "pragma solidity ^0.5.1;\r\n\r\nlibrary Shared {\r\n    /// @notice Roles in automoblie supply chain industry, regulated by\r\n    /// supervisor.\r\n    enum Entity {\r\n        _NONE,\r\n        CUSTOMER,\r\n        DEALERSHIP,\r\n        DISTRIBUTOR,\r\n        INVESTOR,\r\n        MANUFACTURER,\r\n        SERVICE,\r\n        SUPERVISOR,\r\n        SUPPLIER\r\n    }\r\n\r\n    /// @notice Details of commodity\r\n    struct Detail {\r\n        string name;\r\n        uint256 price;\r\n        bool available;\r\n    }\r\n}\r\n",
+  "metadata": "{\"compiler\":{\"version\":\"0.5.1+commit.c8a2cb62\"},\"language\":\"Solidity\",\"output\":{\"abi\":[],\"devdoc\":{\"methods\":{}},\"userdoc\":{\"methods\":{}}},\"settings\":{\"compilationTarget\":{\"project:/contracts/lib/Shared.sol\":\"Shared\"},\"evmVersion\":\"byzantium\",\"libraries\":{},\"optimizer\":{\"enabled\":false,\"runs\":200},\"remappings\":[]},\"sources\":{\"project:/contracts/lib/Shared.sol\":{\"keccak256\":\"0x548e595cc72e42fcd65a45f80068e8b2c184a68f2fa80b893cc5a077671dbb09\",\"urls\":[\"bzzr://85e28d2f1bf67cb0bcba2c0f7dbb0bfcd084efe3aeba1be94ccf35e90ad54123\"]}},\"version\":1}",
+  "bytecode": "0x604c602c600b82828239805160001a60731460008114601c57601e565bfe5b5030600052607381538281f3fe73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a72305820c21d67999864d25fc606a42aac8c2a4b5276d3ed94f6af77b95f3404f762ba370029",
+  "deployedBytecode": "0x73000000000000000000000000000000000000000030146080604052600080fdfea165627a7a72305820c21d67999864d25fc606a42aac8c2a4b5276d3ed94f6af77b95f3404f762ba370029",
+  "sourceMap": "27:979:13:-;;132:2:-1;166:7;155:9;146:7;137:37;252:7;246:14;243:1;238:23;232:4;229:33;270:1;265:20;;;;222:63;;265:20;274:9;222:63;;298:9;295:1;288:20;328:4;319:7;311:22;352:7;343;336:24",
+  "deployedSourceMap": "27:979:13:-;;;;;;;;",
+  "source": "pragma solidity ^0.5.1;\r\n\r\nlibrary Shared {\r\n    /// @notice Roles in automoblie supply chain industry, regulated by\r\n    /// supervisor.\r\n    enum Entity {\r\n        _NONE,\r\n        CUSTOMER,\r\n        DEALERSHIP,\r\n        DISTRIBUTOR,\r\n        INVESTOR,\r\n        MANUFACTURER,\r\n        SERVICE,\r\n        SUPERVISOR,\r\n        SUPPLIER\r\n    }\r\n\r\n    /// @notice Details of commodity\r\n    struct Detail {\r\n        string name;\r\n        uint256 price;\r\n        bool available;\r\n    }\r\n\r\n    /// @notice Order for specific commodity.\r\n    /// e.g. car part from supplier, car from manufacturer.\r\n    struct Order {\r\n        address payable creator;\r\n        uint256 due;\r\n        uint256 commodity; // index of commodity\r\n        uint256 price;\r\n        uint256 margin;\r\n        address payable filler;\r\n        OrderStatus status;\r\n    }\r\n\r\n    enum OrderStatus {\r\n        _NONE,\r\n        OPEN,\r\n        TAKEN,\r\n        FILLED,\r\n        STOCKED,\r\n        COMPLETED,\r\n        CANCELD,\r\n        OVERDUE\r\n    }\r\n}\r\n",
   "sourcePath": "C:\\Users\\Calvin\\Desktop\\path-project\\contracts\\lib\\Shared.sol",
   "ast": {
     "absolutePath": "project:/contracts/lib/Shared.sol",
     "exportedSymbols": {
       "Shared": [
-        1971
+        2336
       ]
     },
-    "id": 1972,
+    "id": 2337,
     "nodeType": "SourceUnit",
     "nodes": [
       {
-        "id": 1953,
+        "id": 2294,
         "literals": [
           "solidity",
           "^",
@@ -35,67 +35,67 @@
         "contractKind": "library",
         "documentation": null,
         "fullyImplemented": true,
-        "id": 1971,
+        "id": 2336,
         "linearizedBaseContracts": [
-          1971
+          2336
         ],
         "name": "Shared",
         "nodeType": "ContractDefinition",
         "nodes": [
           {
             "canonicalName": "Shared.Entity",
-            "id": 1963,
+            "id": 2304,
             "members": [
               {
-                "id": 1954,
+                "id": 2295,
                 "name": "_NONE",
                 "nodeType": "EnumValue",
                 "src": "166:5:13"
               },
               {
-                "id": 1955,
+                "id": 2296,
                 "name": "CUSTOMER",
                 "nodeType": "EnumValue",
                 "src": "182:8:13"
               },
               {
-                "id": 1956,
+                "id": 2297,
                 "name": "DEALERSHIP",
                 "nodeType": "EnumValue",
                 "src": "201:10:13"
               },
               {
-                "id": 1957,
+                "id": 2298,
                 "name": "DISTRIBUTOR",
                 "nodeType": "EnumValue",
                 "src": "222:11:13"
               },
               {
-                "id": 1958,
+                "id": 2299,
                 "name": "INVESTOR",
                 "nodeType": "EnumValue",
                 "src": "244:8:13"
               },
               {
-                "id": 1959,
+                "id": 2300,
                 "name": "MANUFACTURER",
                 "nodeType": "EnumValue",
                 "src": "263:12:13"
               },
               {
-                "id": 1960,
+                "id": 2301,
                 "name": "SERVICE",
                 "nodeType": "EnumValue",
                 "src": "286:7:13"
               },
               {
-                "id": 1961,
+                "id": 2302,
                 "name": "SUPERVISOR",
                 "nodeType": "EnumValue",
                 "src": "304:10:13"
               },
               {
-                "id": 1962,
+                "id": 2303,
                 "name": "SUPPLIER",
                 "nodeType": "EnumValue",
                 "src": "325:8:13"
@@ -107,14 +107,14 @@
           },
           {
             "canonicalName": "Shared.Detail",
-            "id": 1970,
+            "id": 2311,
             "members": [
               {
                 "constant": false,
-                "id": 1965,
+                "id": 2306,
                 "name": "name",
                 "nodeType": "VariableDeclaration",
-                "scope": 1970,
+                "scope": 2311,
                 "src": "411:11:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -123,7 +123,7 @@
                   "typeString": "string"
                 },
                 "typeName": {
-                  "id": 1964,
+                  "id": 2305,
                   "name": "string",
                   "nodeType": "ElementaryTypeName",
                   "src": "411:6:13",
@@ -137,10 +137,10 @@
               },
               {
                 "constant": false,
-                "id": 1967,
+                "id": 2308,
                 "name": "price",
                 "nodeType": "VariableDeclaration",
-                "scope": 1970,
+                "scope": 2311,
                 "src": "433:13:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -149,7 +149,7 @@
                   "typeString": "uint256"
                 },
                 "typeName": {
-                  "id": 1966,
+                  "id": 2307,
                   "name": "uint256",
                   "nodeType": "ElementaryTypeName",
                   "src": "433:7:13",
@@ -163,10 +163,10 @@
               },
               {
                 "constant": false,
-                "id": 1969,
+                "id": 2310,
                 "name": "available",
                 "nodeType": "VariableDeclaration",
-                "scope": 1970,
+                "scope": 2311,
                 "src": "457:14:13",
                 "stateVariable": false,
                 "storageLocation": "default",
@@ -175,7 +175,7 @@
                   "typeString": "bool"
                 },
                 "typeName": {
-                  "id": 1968,
+                  "id": 2309,
                   "name": "bool",
                   "nodeType": "ElementaryTypeName",
                   "src": "457:4:13",
@@ -190,23 +190,277 @@
             ],
             "name": "Detail",
             "nodeType": "StructDefinition",
-            "scope": 1971,
+            "scope": 2336,
             "src": "386:93:13",
             "visibility": "public"
+          },
+          {
+            "canonicalName": "Shared.Order",
+            "id": 2326,
+            "members": [
+              {
+                "constant": false,
+                "id": 2313,
+                "name": "creator",
+                "nodeType": "VariableDeclaration",
+                "scope": 2326,
+                "src": "619:23:13",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address_payable",
+                  "typeString": "address payable"
+                },
+                "typeName": {
+                  "id": 2312,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "619:15:13",
+                  "stateMutability": "payable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2315,
+                "name": "due",
+                "nodeType": "VariableDeclaration",
+                "scope": 2326,
+                "src": "653:11:13",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2314,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "653:7:13",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2317,
+                "name": "commodity",
+                "nodeType": "VariableDeclaration",
+                "scope": 2326,
+                "src": "675:17:13",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2316,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "675:7:13",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2319,
+                "name": "price",
+                "nodeType": "VariableDeclaration",
+                "scope": 2326,
+                "src": "725:13:13",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2318,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "725:7:13",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2321,
+                "name": "margin",
+                "nodeType": "VariableDeclaration",
+                "scope": 2326,
+                "src": "749:14:13",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_uint256",
+                  "typeString": "uint256"
+                },
+                "typeName": {
+                  "id": 2320,
+                  "name": "uint256",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "749:7:13",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_uint256",
+                    "typeString": "uint256"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2323,
+                "name": "filler",
+                "nodeType": "VariableDeclaration",
+                "scope": 2326,
+                "src": "774:22:13",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_address_payable",
+                  "typeString": "address payable"
+                },
+                "typeName": {
+                  "id": 2322,
+                  "name": "address",
+                  "nodeType": "ElementaryTypeName",
+                  "src": "774:15:13",
+                  "stateMutability": "payable",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_address_payable",
+                    "typeString": "address payable"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              },
+              {
+                "constant": false,
+                "id": 2325,
+                "name": "status",
+                "nodeType": "VariableDeclaration",
+                "scope": 2326,
+                "src": "807:18:13",
+                "stateVariable": false,
+                "storageLocation": "default",
+                "typeDescriptions": {
+                  "typeIdentifier": "t_enum$_OrderStatus_$2335",
+                  "typeString": "enum Shared.OrderStatus"
+                },
+                "typeName": {
+                  "contractScope": null,
+                  "id": 2324,
+                  "name": "OrderStatus",
+                  "nodeType": "UserDefinedTypeName",
+                  "referencedDeclaration": 2335,
+                  "src": "807:11:13",
+                  "typeDescriptions": {
+                    "typeIdentifier": "t_enum$_OrderStatus_$2335",
+                    "typeString": "enum Shared.OrderStatus"
+                  }
+                },
+                "value": null,
+                "visibility": "internal"
+              }
+            ],
+            "name": "Order",
+            "nodeType": "StructDefinition",
+            "scope": 2336,
+            "src": "595:238:13",
+            "visibility": "public"
+          },
+          {
+            "canonicalName": "Shared.OrderStatus",
+            "id": 2335,
+            "members": [
+              {
+                "id": 2327,
+                "name": "_NONE",
+                "nodeType": "EnumValue",
+                "src": "869:5:13"
+              },
+              {
+                "id": 2328,
+                "name": "OPEN",
+                "nodeType": "EnumValue",
+                "src": "885:4:13"
+              },
+              {
+                "id": 2329,
+                "name": "TAKEN",
+                "nodeType": "EnumValue",
+                "src": "900:5:13"
+              },
+              {
+                "id": 2330,
+                "name": "FILLED",
+                "nodeType": "EnumValue",
+                "src": "916:6:13"
+              },
+              {
+                "id": 2331,
+                "name": "STOCKED",
+                "nodeType": "EnumValue",
+                "src": "933:7:13"
+              },
+              {
+                "id": 2332,
+                "name": "COMPLETED",
+                "nodeType": "EnumValue",
+                "src": "951:9:13"
+              },
+              {
+                "id": 2333,
+                "name": "CANCELD",
+                "nodeType": "EnumValue",
+                "src": "971:7:13"
+              },
+              {
+                "id": 2334,
+                "name": "OVERDUE",
+                "nodeType": "EnumValue",
+                "src": "989:7:13"
+              }
+            ],
+            "name": "OrderStatus",
+            "nodeType": "EnumDefinition",
+            "src": "841:162:13"
           }
         ],
-        "scope": 1972,
-        "src": "27:455:13"
+        "scope": 2337,
+        "src": "27:979:13"
       }
     ],
-    "src": "0:484:13"
+    "src": "0:1008:13"
   },
   "legacyAST": {
     "attributes": {
       "absolutePath": "project:/contracts/lib/Shared.sol",
       "exportedSymbols": {
         "Shared": [
-          1971
+          2336
         ]
       }
     },
@@ -220,7 +474,7 @@
             ".1"
           ]
         },
-        "id": 1953,
+        "id": 2294,
         "name": "PragmaDirective",
         "src": "0:23:13"
       },
@@ -236,10 +490,10 @@
           "documentation": null,
           "fullyImplemented": true,
           "linearizedBaseContracts": [
-            1971
+            2336
           ],
           "name": "Shared",
-          "scope": 1972
+          "scope": 2337
         },
         "children": [
           {
@@ -252,7 +506,7 @@
                 "attributes": {
                   "name": "_NONE"
                 },
-                "id": 1954,
+                "id": 2295,
                 "name": "EnumValue",
                 "src": "166:5:13"
               },
@@ -260,7 +514,7 @@
                 "attributes": {
                   "name": "CUSTOMER"
                 },
-                "id": 1955,
+                "id": 2296,
                 "name": "EnumValue",
                 "src": "182:8:13"
               },
@@ -268,7 +522,7 @@
                 "attributes": {
                   "name": "DEALERSHIP"
                 },
-                "id": 1956,
+                "id": 2297,
                 "name": "EnumValue",
                 "src": "201:10:13"
               },
@@ -276,7 +530,7 @@
                 "attributes": {
                   "name": "DISTRIBUTOR"
                 },
-                "id": 1957,
+                "id": 2298,
                 "name": "EnumValue",
                 "src": "222:11:13"
               },
@@ -284,7 +538,7 @@
                 "attributes": {
                   "name": "INVESTOR"
                 },
-                "id": 1958,
+                "id": 2299,
                 "name": "EnumValue",
                 "src": "244:8:13"
               },
@@ -292,7 +546,7 @@
                 "attributes": {
                   "name": "MANUFACTURER"
                 },
-                "id": 1959,
+                "id": 2300,
                 "name": "EnumValue",
                 "src": "263:12:13"
               },
@@ -300,7 +554,7 @@
                 "attributes": {
                   "name": "SERVICE"
                 },
-                "id": 1960,
+                "id": 2301,
                 "name": "EnumValue",
                 "src": "286:7:13"
               },
@@ -308,7 +562,7 @@
                 "attributes": {
                   "name": "SUPERVISOR"
                 },
-                "id": 1961,
+                "id": 2302,
                 "name": "EnumValue",
                 "src": "304:10:13"
               },
@@ -316,12 +570,12 @@
                 "attributes": {
                   "name": "SUPPLIER"
                 },
-                "id": 1962,
+                "id": 2303,
                 "name": "EnumValue",
                 "src": "325:8:13"
               }
             ],
-            "id": 1963,
+            "id": 2304,
             "name": "EnumDefinition",
             "src": "143:197:13"
           },
@@ -329,7 +583,7 @@
             "attributes": {
               "canonicalName": "Shared.Detail",
               "name": "Detail",
-              "scope": 1971,
+              "scope": 2336,
               "visibility": "public"
             },
             "children": [
@@ -337,7 +591,7 @@
                 "attributes": {
                   "constant": false,
                   "name": "name",
-                  "scope": 1970,
+                  "scope": 2311,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "string",
@@ -350,12 +604,12 @@
                       "name": "string",
                       "type": "string"
                     },
-                    "id": 1964,
+                    "id": 2305,
                     "name": "ElementaryTypeName",
                     "src": "411:6:13"
                   }
                 ],
-                "id": 1965,
+                "id": 2306,
                 "name": "VariableDeclaration",
                 "src": "411:11:13"
               },
@@ -363,7 +617,7 @@
                 "attributes": {
                   "constant": false,
                   "name": "price",
-                  "scope": 1970,
+                  "scope": 2311,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "uint256",
@@ -376,12 +630,12 @@
                       "name": "uint256",
                       "type": "uint256"
                     },
-                    "id": 1966,
+                    "id": 2307,
                     "name": "ElementaryTypeName",
                     "src": "433:7:13"
                   }
                 ],
-                "id": 1967,
+                "id": 2308,
                 "name": "VariableDeclaration",
                 "src": "433:13:13"
               },
@@ -389,7 +643,7 @@
                 "attributes": {
                   "constant": false,
                   "name": "available",
-                  "scope": 1970,
+                  "scope": 2311,
                   "stateVariable": false,
                   "storageLocation": "default",
                   "type": "bool",
@@ -402,29 +656,303 @@
                       "name": "bool",
                       "type": "bool"
                     },
-                    "id": 1968,
+                    "id": 2309,
                     "name": "ElementaryTypeName",
                     "src": "457:4:13"
                   }
                 ],
-                "id": 1969,
+                "id": 2310,
                 "name": "VariableDeclaration",
                 "src": "457:14:13"
               }
             ],
-            "id": 1970,
+            "id": 2311,
             "name": "StructDefinition",
             "src": "386:93:13"
+          },
+          {
+            "attributes": {
+              "canonicalName": "Shared.Order",
+              "name": "Order",
+              "scope": 2336,
+              "visibility": "public"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "creator",
+                  "scope": 2326,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "address payable",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "stateMutability": "payable",
+                      "type": "address payable"
+                    },
+                    "id": 2312,
+                    "name": "ElementaryTypeName",
+                    "src": "619:15:13"
+                  }
+                ],
+                "id": 2313,
+                "name": "VariableDeclaration",
+                "src": "619:23:13"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "due",
+                  "scope": 2326,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 2314,
+                    "name": "ElementaryTypeName",
+                    "src": "653:7:13"
+                  }
+                ],
+                "id": 2315,
+                "name": "VariableDeclaration",
+                "src": "653:11:13"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "commodity",
+                  "scope": 2326,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 2316,
+                    "name": "ElementaryTypeName",
+                    "src": "675:7:13"
+                  }
+                ],
+                "id": 2317,
+                "name": "VariableDeclaration",
+                "src": "675:17:13"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "price",
+                  "scope": 2326,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 2318,
+                    "name": "ElementaryTypeName",
+                    "src": "725:7:13"
+                  }
+                ],
+                "id": 2319,
+                "name": "VariableDeclaration",
+                "src": "725:13:13"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "margin",
+                  "scope": 2326,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "uint256",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "uint256",
+                      "type": "uint256"
+                    },
+                    "id": 2320,
+                    "name": "ElementaryTypeName",
+                    "src": "749:7:13"
+                  }
+                ],
+                "id": 2321,
+                "name": "VariableDeclaration",
+                "src": "749:14:13"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "filler",
+                  "scope": 2326,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "address payable",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "name": "address",
+                      "stateMutability": "payable",
+                      "type": "address payable"
+                    },
+                    "id": 2322,
+                    "name": "ElementaryTypeName",
+                    "src": "774:15:13"
+                  }
+                ],
+                "id": 2323,
+                "name": "VariableDeclaration",
+                "src": "774:22:13"
+              },
+              {
+                "attributes": {
+                  "constant": false,
+                  "name": "status",
+                  "scope": 2326,
+                  "stateVariable": false,
+                  "storageLocation": "default",
+                  "type": "enum Shared.OrderStatus",
+                  "value": null,
+                  "visibility": "internal"
+                },
+                "children": [
+                  {
+                    "attributes": {
+                      "contractScope": null,
+                      "name": "OrderStatus",
+                      "referencedDeclaration": 2335,
+                      "type": "enum Shared.OrderStatus"
+                    },
+                    "id": 2324,
+                    "name": "UserDefinedTypeName",
+                    "src": "807:11:13"
+                  }
+                ],
+                "id": 2325,
+                "name": "VariableDeclaration",
+                "src": "807:18:13"
+              }
+            ],
+            "id": 2326,
+            "name": "StructDefinition",
+            "src": "595:238:13"
+          },
+          {
+            "attributes": {
+              "canonicalName": "Shared.OrderStatus",
+              "name": "OrderStatus"
+            },
+            "children": [
+              {
+                "attributes": {
+                  "name": "_NONE"
+                },
+                "id": 2327,
+                "name": "EnumValue",
+                "src": "869:5:13"
+              },
+              {
+                "attributes": {
+                  "name": "OPEN"
+                },
+                "id": 2328,
+                "name": "EnumValue",
+                "src": "885:4:13"
+              },
+              {
+                "attributes": {
+                  "name": "TAKEN"
+                },
+                "id": 2329,
+                "name": "EnumValue",
+                "src": "900:5:13"
+              },
+              {
+                "attributes": {
+                  "name": "FILLED"
+                },
+                "id": 2330,
+                "name": "EnumValue",
+                "src": "916:6:13"
+              },
+              {
+                "attributes": {
+                  "name": "STOCKED"
+                },
+                "id": 2331,
+                "name": "EnumValue",
+                "src": "933:7:13"
+              },
+              {
+                "attributes": {
+                  "name": "COMPLETED"
+                },
+                "id": 2332,
+                "name": "EnumValue",
+                "src": "951:9:13"
+              },
+              {
+                "attributes": {
+                  "name": "CANCELD"
+                },
+                "id": 2333,
+                "name": "EnumValue",
+                "src": "971:7:13"
+              },
+              {
+                "attributes": {
+                  "name": "OVERDUE"
+                },
+                "id": 2334,
+                "name": "EnumValue",
+                "src": "989:7:13"
+              }
+            ],
+            "id": 2335,
+            "name": "EnumDefinition",
+            "src": "841:162:13"
           }
         ],
-        "id": 1971,
+        "id": 2336,
         "name": "ContractDefinition",
-        "src": "27:455:13"
+        "src": "27:979:13"
       }
     ],
-    "id": 1972,
+    "id": 2337,
     "name": "SourceUnit",
-    "src": "0:484:13"
+    "src": "0:1008:13"
   },
   "compiler": {
     "name": "solc",
@@ -432,7 +960,7 @@
   },
   "networks": {},
   "schemaVersion": "3.4.3",
-  "updatedAt": "2021-09-25T09:18:37.716Z",
+  "updatedAt": "2021-11-16T09:37:30.092Z",
   "devdoc": {
     "methods": {}
   },

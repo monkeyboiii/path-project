@@ -8,34 +8,9 @@ import "./lib/Shared.sol";
 contract Platform {
     using SafeMath for uint256;
 
-    /// @notice Order for specific commodity.
-    /// e.g. car part from supplier, car from manufacturer.
-    struct Order {
-        address payable creator;
-        uint256 due;
-        uint256 commodity; // index of commodity
-        uint256 price;
-        uint256 margin;
-        address payable filler;
-        OrderStatus status;
-    }
-
-    enum OrderStatus {
-        _NONE,
-        OPEN,
-        TAKEN,
-        FILLED,
-        STOCKED,
-        COMPLETED,
-        CANCELD,
-        OVERDUE
-    }
-
-    //
-
     Commodity CMD;
 
-    Order[] public orders;
+    Shared.Order[] public orders;
     uint256 public MAKER_FEE = 0 wei;
     uint256 public TAKER_FEE = 0 wei;
     uint256 public MARGIN_RATE = 0; // 0.0 to 100.0%
@@ -47,7 +22,7 @@ contract Platform {
     event orderCreated(address creator, uint256 due, uint256 commodity);
     event orderTaken(address filler, uint256 index);
     event orderFilled(address filler, uint256 index);
-    event orderStoked(address filler, uint256 index);
+    event orderStocked(address filler, uint256 index);
     event orderCompleted(address creator, address filler, uint256 index);
     event orderCanceled(address creator, uint256 index);
     event orderOverdued(address creator, uint256 index, uint256 due);
@@ -104,6 +79,12 @@ contract Platform {
 
     //
 
+    function getOrder(uint256 index) public view returns (Shared.Order memory) {
+        return orders[index];
+    }
+
+    //
+
     /// @param index The index of the commodity in the CMD.commodities list
     /// @return the index of the order created
     function createOrder(uint256 index, uint256 due)
@@ -123,14 +104,14 @@ contract Platform {
             "Platform: make order margin not enough"
         );
         orders.push(
-            Order(
+            Shared.Order(
                 msg.sender,
                 now,
                 index,
                 price,
                 margin,
                 address(0),
-                OrderStatus.OPEN
+                Shared.OrderStatus.OPEN
             )
         );
 
@@ -140,33 +121,33 @@ contract Platform {
 
     /// @param index The index in the order list
     function takeOrder(uint256 index) external payable registered {
-        Order storage order = orders[index];
+        Shared.Order storage order = orders[index];
         require(msg.value >= TAKER_FEE, "Platform: take order fee not enough");
         if (now > order.due) {
-            order.status = OrderStatus.OVERDUE;
+            order.status = Shared.OrderStatus.OVERDUE;
             revert("Platform: order overdue");
         }
 
         order.filler = msg.sender;
-        order.status = OrderStatus.TAKEN;
+        order.status = Shared.OrderStatus.TAKEN;
 
         emit orderTaken(msg.sender, index);
     }
 
     /// @param index The index in the order list
     function cancelOrder(uint256 index) external registered {
-        Order storage order = orders[index];
+        Shared.Order storage order = orders[index];
         require(msg.sender == order.creator, "Platform: order not yours");
         require(
-            order.status == OrderStatus.OPEN,
+            order.status == Shared.OrderStatus.OPEN,
             "Platform: cannot cancel order"
         );
         if (now > order.due) {
-            order.status = OrderStatus.OVERDUE;
+            order.status = Shared.OrderStatus.OVERDUE;
             revert("Platform: order overdue");
         }
 
-        order.status = OrderStatus.CANCELD;
+        order.status = Shared.OrderStatus.CANCELD;
         msg.sender.transfer(order.margin);
 
         emit orderCanceled(msg.sender, index);
@@ -174,14 +155,14 @@ contract Platform {
 
     /// @param index The index in the order list
     function fillOrder(uint256 index) external payable registered {
-        Order storage order = orders[index];
+        Shared.Order storage order = orders[index];
         require(msg.sender == order.filler, "Platform: order not yours");
         if (now > order.due) {
-            order.status = OrderStatus.OVERDUE;
+            order.status = Shared.OrderStatus.OVERDUE;
             revert("Platform: order overdue");
         }
 
-        order.status = OrderStatus.FILLED;
+        order.status = Shared.OrderStatus.FILLED;
 
         emit orderFilled(msg.sender, index);
     }
@@ -191,25 +172,25 @@ contract Platform {
         payable
         registered
     {
-        Order storage order = orders[index];
+        Shared.Order storage order = orders[index];
         require(msg.sender == order.filler, "Platform: order not yours");
         require(entities[stocker] == uint8(Shared.Entity.DISTRIBUTOR));
         if (now > order.due) {
-            order.status = OrderStatus.OVERDUE;
+            order.status = Shared.OrderStatus.OVERDUE;
             revert("Platform: order overdue");
         }
 
-        order.status = OrderStatus.STOCKED;
+        order.status = Shared.OrderStatus.STOCKED;
 
-        emit orderStoked(msg.sender, index);
+        emit orderStocked(msg.sender, index);
     }
 
     /// @notice Order creator finally completes by confirming received commodity.
     function completeOrder(uint256 index) external payable registered {
-        Order storage order = orders[index];
+        Shared.Order storage order = orders[index];
         require(msg.sender == order.creator, "Platform: order not yours");
         require(
-            order.status != OrderStatus.COMPLETED,
+            order.status != Shared.OrderStatus.COMPLETED,
             "Platform: order already completed"
         );
         require(
@@ -217,7 +198,7 @@ contract Platform {
             "Platform: payment not enough"
         );
 
-        order.status = OrderStatus.COMPLETED;
+        order.status = Shared.OrderStatus.COMPLETED;
         order.filler.transfer(order.price);
 
         emit orderCompleted(msg.sender, order.filler, index);
